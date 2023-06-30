@@ -21,3 +21,9 @@ jobs:
         distribution: 'temurin'
     - name: Build with Ant
       run: ant -noinput -buildfile build.xml
+      
+    - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: C-Application-Build
+          path: build/app  

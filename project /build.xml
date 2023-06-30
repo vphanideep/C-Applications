@@ -1,0 +1,36 @@
+<project name="C-Application" default="build" basedir=".">
+
+    <!-- Set properties -->
+    <property name="src.dir" value="src"/>
+    <property name="test.dir" value="test"/>
+    <property name="build.dir" value="build"/>
+    <property name="main.src.file" value="${src.dir}/main.c"/>
+    <property name="test.src.file" value="${test.dir}/test.c"/>
+    <property name="executable.file" value="${build.dir}/app"/>
+
+    <!-- Define targets -->
+    <target name="build">
+        <mkdir dir="${build.dir}"/>
+        <cc output="${executable.file}" objectDir="${build.dir}">
+            <compilerarg value="-g"/>
+            <compilerarg value="-Wall"/>
+            <compilerarg value="-Wextra"/>
+            <src path="${main.src.file}"/>
+        </cc>
+    </target>
+
+    <target name="test" depends="build">
+        <cc output="${build.dir}/test" objectDir="${build.dir}">
+            <compilerarg value="-g"/>
+            <compilerarg value="-Wall"/>
+            <compilerarg value="-Wextra"/>
+            <src path="${test.src.file}"/>
+        </cc>
+        <exec executable="${build.dir}/test"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+</project>

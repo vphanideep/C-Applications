@@ -11,21 +11,25 @@
     <!-- Define targets -->
     <target name="build">
         <mkdir dir="${build.dir}"/>
-        <cc output="${executable.file}" objectDir="${build.dir}">
-            <compilerarg value="-g"/>
-            <compilerarg value="-Wall"/>
-            <compilerarg value="-Wextra"/>
-            <src path="${main.src.file}"/>
-        </cc>
+        <exec executable="gcc">
+            <arg value="-o"/>
+            <arg value="${executable.file}"/>
+            <arg value="-g"/>
+            <arg value="-Wall"/>
+            <arg value="-Wextra"/>
+            <arg value="${main.src.file}"/>
+        </exec>
     </target>
 
     <target name="test" depends="build">
-        <cc output="${build.dir}/test" objectDir="${build.dir}">
-            <compilerarg value="-g"/>
-            <compilerarg value="-Wall"/>
-            <compilerarg value="-Wextra"/>
-            <src path="${test.src.file}"/>
-        </cc>
+        <exec executable="gcc">
+            <arg value="-o"/>
+            <arg value="${build.dir}/test"/>
+            <arg value="-g"/>
+            <arg value="-Wall"/>
+            <arg value="-Wextra"/>
+            <arg value="${test.src.file}"/>
+        </exec>
         <exec executable="${build.dir}/test"/>
     </target>
 
